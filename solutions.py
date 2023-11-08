@@ -118,6 +118,175 @@ def ex11():
     myFile.close()
 
 
+def ex12():
+    while True:
+
+        num = input("Enter an integer or 'quit' to exit: ")
+        if num == 'quit':
+            break
+
+        isInt = True
+
+        for c in num:
+            if c == '.':
+                isInt = False
+                break
+
+        if isInt:
+            num = int(num)
+            if num > 0:
+                print(f"-{num}")
+            elif num < 0:
+                print(num - 2*num)
+            else:
+                print(f"The number is zero.")
+        else:
+            print("Only Integer Values allowed")
+
+
+def ex13():
+    while True:
+        num1 = input("Enter integer or 'quit' to exit: ")
+        num2 = input("Enter integer or 'quit' to exit: ")
+
+        if num1 == "quit" or num2 == "quit":
+            break
+        else:
+            print(f"Sum = {int(num1) + int(num2)}")
+
+
+def ex14():
+    while True:
+        num1 = input("Enter num1 or 'quit' to exit: ")
+        if num1 == 'quit':
+            break
+        num2 = input("Enter num2 or 'quit' to exit: ")
+        if num2 == 'quit':
+            break
+        op = input("Enter operation(add, sub, mul, div): ")
+
+        if op == 'quit':
+            break
+        elif op == "add":
+            print(f"Sum = {float(num1) + float(num2)}")
+        elif op == "sub":
+            print(f"Sub = {float(num1) - float(num2)}")
+        elif op == "mul":
+            print(f"Mul = {float(num1) * float(num2)}")
+        elif op == "div":
+            try:
+                print(f"Div = {float(num1)/float(num2)}")
+            except ZeroDivisionError as e:
+                print("Cannot divide by zero!")
+        else:
+            print("Enter Valid Input")
+
+
+def ex15():
+    myFile = open("ex15output.txt", "a")
+
+    while True:
+        num1 = input("Enter num1 or 'quit' to exit: ")
+        if num1 == 'quit':
+            break
+        num2 = input("Enter num2 or 'quit' to exit: ")
+        if num2 == 'quit':
+            break
+        op = input("Enter operation(add, sub, mul, div): ")
+        res = 0
+
+        if op == 'quit':
+            break
+        elif op == "add":
+            res = float(num1) + float(num2)
+            print(f"Sum = {res}")
+        elif op == "sub":
+            res = float(num1) - float(num2)
+            print(f"Sub = {res}")
+        elif op == "mul":
+            res = float(num1) * float(num2)
+            print(f"Mul = {res}")
+        elif op == "div":
+            try:
+                res = float(num1)/float(num2)
+                print(f"Div = {res}")
+            except ZeroDivisionError as e:
+                print("Cannot divide by zero!")
+        else:
+            print("Enter Valid Input")
+
+        log = f"{str(datetime.datetime.now())} {num1} {op} {num2} = {res} \n"
+        myFile.write(log)
+    myFile.close()
+
+
+def ex16():
+    # Hashlib library is required to use SHA256
+    mydict = {}
+    while True:
+        username = input("Enter a username or 'quit' to exit: ")
+        if username == 'quit':
+            break
+        password = input("Enter a password or 'quit' to exit: ")
+        if password == 'quit':
+            break
+        mydict[username] = hashlib.sha256(password.encode())
+
+    for key in mydict:
+        # hexdigest displays the hexadecimal value of the hash
+        print(key, ": ", mydict[key].hexdigest())
+
+
+def ex17():
+    myDict = {}
+    print("Enter 'quit' anytime in the program to exit!")
+
+    while True:
+        mode = input("Please enter mode: Add | Login: ")
+        if mode == 'quit':
+            break
+
+        if mode == "add":
+            username = input("Enter a username: ")
+            if username == 'quit':
+                break
+            password = input("Enter a password: ")
+            if password == 'quit':
+                break
+            myDict[username] = hashlib.sha256(password.encode())
+
+        if mode == "login":
+            username = input("Enter a username: ")
+            if username == 'quit':
+                break
+            password = input("Enter a password: ")
+            if password == 'quit':
+                break
+            # print(f"stored password:{myDict[username]}\nentered password: { hashlib.sha256(password.encode())}")
+            if myDict[username].hexdigest() == hashlib.sha256(password.encode()).hexdigest():
+                print("Password is correct")
+            else:
+                print("Password is incorrect")
+    for key in myDict:
+        # hexdigest displays the hexadecimal value of the hash
+        print(key, ": ", myDict[key].hexdigest())
+
+
+def ex18():
+    num = random.randint(0, 100)
+
+    while True:
+        guess = int(input("Please enter a guess between 0 and 100: "))
+
+        if (guess < num):
+            print("Too low")
+        elif (guess > num):
+            print("Too high")
+        else:
+            print("You win!")
+            break
+
+
 if __name__ == "__main__":
     main()
     # ex1()
@@ -130,4 +299,11 @@ if __name__ == "__main__":
     # ex8()
     # ex9()
     # ex10()
-    ex11()
+    # ex11()
+    # ex12()
+    # ex13()
+    # ex14()
+    # ex15()
+    # ex16()
+    # ex17()
+    # ex18()
